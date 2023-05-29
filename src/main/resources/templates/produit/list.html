@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des produits</title>
+    <link rel="icon" sizes="32x32" href="/user/logo.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Ajouter les liens vers les fichiers CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Ajouter les liens vers les fichiers CSS des icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body{
+            font-family: 'Open Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/produit/dashboard">Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/produit/add"><i class="fas fa-plus"></i> Ajouter un produit</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#"><i class="fas fa-list"></i>Liste</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/profile"><i class="fas fa-user"></i> Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/logout"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Contenu de la page -->
+<div class="container-fluid m-1" th:if="${vide}">
+    <p class="alert alert-warning">Aucun produit enregistrer</p>
+
+</div>
+<div th:if="${produits}" class="container-fluid mt-4">
+    <div class="d-flex justify-content-between">
+        <h1>Liste des produits</h1>
+
+        <a href="/produit/list" class="btn btn-info m-2">voir tous</a>
+    </div>
+    <!-- Ajouter la barre de recherche -->
+    <form  id="search-form" action="/produit/search" method="GET" class="mb-3">
+        <div class="input-group">
+            <input type="text" id="searchInput" class="form-control" name="keyword" placeholder="Rechercher un produit">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+    <table class="table table-hover table-striped table-responsive-xl">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th><i class="fas fa-text-height"></i>Nom</th>
+            <th>Description</th>
+            <th>Prix(F cfa)</th>
+            <th>Date d'ajout</th>
+            <th colspan="2" class="text-center"><i class="fas fa-pen"></i>Action</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Vérifier s'il y a des produits à afficher -->
+            <!-- Boucle pour afficher les produits -->
+            <tr th:each="produit : ${produits}">
+                <td th:text="${produit.id_produit}"></td>
+                <td th:text="${produit.nom}"></td>
+                <td th:text="${produit.description}"></td>
+                <td th:text="${produit.prix}"></td>
+                <td th:text="${produit.date_in}"></td>
+                <td>
+                    <a th:href="@{/produit/edit/{id}(id=${produit.id_produit})}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i>Modifier</a>
+                </td>
+                <td>
+                   <a th:href="@{/produit/delete/{id}(id=${produit.id_produit})}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>Supprimer</a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Ajouter les liens de pagination ici -->
+    <nav aria-label="Pagination">
+        <ul class="pagination justify-content-end">
+            <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{/produit/list(page=${currentPage - 1})}"><i class="fas fa-angle-double-left"></i></a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage == totalPages - 1 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{/produit/list(page=${currentPage + 1})}"><i class="fas fa-angle-double-right"></i></a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
+
+
+
+<!-- Ajouter les liens vers les fichiers JavaScript de Bootstrap et jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.js"></script>
+<script>
+    $(document).ready(function() {
+        // Lorsque la valeur du champ de recherche change
+        $('#searchInput').keyup(function() {
+            var searchText = $(this).val().toLowerCase(); // Valeur saisie en minuscules
+
+            // Parcourir chaque ligne du tableau
+            $('table tbody tr').each(function() {
+                var rowData = $(this).text().toLowerCase(); // Contenu de la ligne en minuscules
+
+                // Vérifier si la ligne correspond à la recherche
+                if (rowData.indexOf(searchText) === -1) {
+                    $(this).hide(); // Masquer la ligne si elle ne correspond pas
+                } else {
+                    $(this).show(); // Afficher la ligne si elle correspond
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

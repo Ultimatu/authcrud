@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up page</title>
+
+    <!-- Inclusion des fichiers CSS Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" sizes="32x32" href="/user/logo.png">
+    <!-- Inclusion des icônes de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Style personnalisé pour la page de signup -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f2f5;
+        }
+
+
+
+        .container {
+            max-width: 500px;
+            margin: 10px auto 0;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul class="nav nav-pills nav-fill bg-dark">
+        <li class="d-flex justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link fs-2" href="/user/login">Login <i class="fas fa-sign-in-alt"></i></a>
+        </li>
+
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>S'inscrire</h1>
+    <hr>
+    <div class="text-center">
+        <img src="/user/logo.png" alt="Logo" class="logo-image">
+    </div>
+
+    <!-- Affichage des messages d'erreur -->
+    <div th:if="${error}">
+        <div class="alert alert-danger">
+            <p>Cet email est déjà associé à un compte</p>
+        </div>
+    </div>
+
+    <form action="/user/signup/send-code" method="post" id="form">
+        <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" id="nom" name="nom" required>
+        </div>
+        <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password" minlength="7">
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                      <i id="password-toggle" class="fas fa-eye"></i>
+                  </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confpassword">Confirmer le mot de passe</label>
+            <input type="password" class="form-control" id="confpassword" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submit">S'inscrire</button>
+    </form>
+
+</div>
+<script !src="">
+    //verification du mot de passe
+    var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confpassword");
+    var form = document.getElementById("form");
+    var submit = document.getElementById("submit");
+    submit.classList.add("disabled");
+    function validatePassword(){
+        if(password.value !== confirm_password.value) {
+            confirm_password.setCustomValidity("Les mots de passe ne correspondent pas");
+        } else {
+            confirm_password.setCustomValidity('');
+            submit.classList.remove("disabled");
+        }
+    }
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+    form.addEventListener('submit', function() {
+        if (password.value !== confirm_password.value) {
+            alert("Les mots de passe ne correspondent pas");
+            event.preventDefault();
+            submit.classList.add("disabled");
+        }
+
+    });
+
+</script>
+</body>
+</html>

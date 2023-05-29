@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" sizes="32x32" href="/user/logo.png">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Add links to Bootstrap CSS files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add links to font icons CSS files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto' ,sans-serif;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .dashboard-card {
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-card h2 {
+            margin-top: 0;
+            color: white;
+        }
+
+
+        .dashboard-card i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .dashboard-card a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dashboard-card a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+<!-- Content of the page -->
+<div class="container mt-4">
+    <h1>Welcome to your Dashboard</h1>
+    <div class="dashboard-grid">
+        <div class="dashboard-card bg-primary">
+            <a href="/produit/add" class="text-white">
+                <i class="fas fa-plus"></i>
+                <h2>Ajouter un produit</h2>
+                <p>Add a new product</p>
+            </a>
+        </div>
+        <div class="dashboard-card bg-info text-white">
+            <a href="/produit/list" class="text-white">
+                <i class="fas fa-list-alt"></i>
+                <h2>Voir les produits</h2>
+                <p>Voir l'ensemble des produits</p>
+            </a>
+        </div>
+        <div class="dashboard-card bg-warning" >
+            <a href="/user/profile" class="text-white">
+                <i class="fas fa-user"></i>
+                <h2>Profile</h2>
+                <p>View and edit your profile</p>
+            </a>
+        </div>
+        <div class="dashboard-card bg-danger">
+            <a href="/user/logout" class="text-white">
+                <i class="fas fa-sign-out-alt"></i>
+                <h2>Se déconnecter</h2>
+                <p>Logout from your account</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Add links to Bootstrap and jQuery JavaScript files -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

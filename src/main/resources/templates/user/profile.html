@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="icon" sizes="32x32" href="/user/logo.png">
+  <!-- Ajouter les liens vers les fichiers CSS de Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Ajouter les liens vers les fichiers CSS des icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Style personnalisé pour la page de profil */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .navbar {
+      background-color: #343a40;
+    }
+
+    .navbar-brand {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .nav-link {
+      color: #fff;
+    }
+
+    .nav-link:hover {
+      color: #ccc;
+    }
+
+    .profile-heading {
+      text-align: center;
+      color: #333;
+      margin-top: 30px;
+    }
+
+    .profile-info {
+      margin-top: 50px;
+    }
+
+    .profile-info th {
+      width: 200px;
+    }
+
+    .profile-actions {
+      margin-top: 50px;
+    }
+
+    .profile-actions a {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Barre de navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/produit/dashboard">Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/produit/add"><i class="fas fa-plus"></i> Ajouter un produit</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/produit/list"><i class="fas fa-list"></i>Liste</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#"><i class="fas fa-user"></i> Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/logout"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- Contenu de la page -->
+<div class="container mt-4">
+  <div class="profile-heading">
+    <h1>Profil Utilisateur</h1>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Informations Personnelles</h3>
+      <table class="table table-bordered profile-info">
+        <tbody>
+        <tr>
+          <th>Nom</th>
+          <td th:text="${user.nom}"></td>
+        </tr>
+        <tr>
+          <th>Prénom</th>
+          <td th:text="${user.prenom}"></td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td th:text="${user.email}"><i class="fas fa-mail"></i></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <h3>Actions</h3>
+      <ul class="list-group profile-actions">
+        <li class="list-group-item"><a href="/user/edit"><i class="fas fa-edit"></i> Modifier Profil</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Ajouter les liens vers les fichiers JavaScript de Bootstrap et jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

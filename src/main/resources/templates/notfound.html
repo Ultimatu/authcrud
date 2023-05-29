@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <link rel="icon" sizes="32x32" href="/user/logo.png">
+    <!-- Ajouter les liens vers les fichiers CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Error Page</h1>
+    <hr>
+    <div class="alert alert-danger">
+        <p>Oops! Une erreur s'est produite.</p>
+        <p>Code d'erreur : <strong th:text="${errorCode}"></strong></p>
+        <p>Error message: <span th:text="${errorMessage}"></span></p>
+        <p>Consultez la console pour plus de détails.</p>
+    </div>
+    <a href="/index" class="btn btn-primary">Retourner à la page d'accueil</a>
+</div>
+
+<!-- Ajouter les liens vers les fichiers JavaScript de Bootstrap et jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

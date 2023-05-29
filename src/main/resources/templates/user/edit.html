@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" sizes="32x32" href="/user/logo.png">
+  <title>Edit Profile</title>
+  <!-- Ajouter les liens vers les fichiers CSS de Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Ajouter les liens vers les fichiers CSS des icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body{
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 10px auto 0;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Barre de navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Edit Profile</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/produit/dashboard"><i class="fas fa-home"></i> Ajouter un produit</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/produit/add"><i class="fas fa-plus"></i> Ajouter un produit</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/produit/list"><i class="fas fa-list"></i>Liste</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/user/profile"><i class="fas fa-user"></i> Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/logout"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Contenu de la page -->
+<div class="container mt-4">
+  <h1>Modifier le Profil Utilisateur</h1>
+  <hr>
+  <!-- error -->
+   <div th:if="${error}" class="alert alert-danger" role="alert">
+    <strong>Erreur! </strong> ${error}
+   </div>
+    <form method="post" action="/user/update">
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" class="form-control" id="nom" name="nom" th:value="${user.nom}">
+      </div>
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input type="text" class="form-control" id="prenom" name="prenom" th:value="${user.prenom}">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" th:value="${user.email}">
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <div class="input-group">
+          <input type="password" class="form-control" id="password" name="password" minlength="8" th:value="${user.password}">
+          <div class="input-group-append">
+                  <span class="input-group-text">
+                      <i id="password-toggle" class="fas fa-eye cursor-pointer"></i>
+                  </span>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+
+</div>
+
+<script>
+  // Fonction pour basculer l'affichage du mot de passe
+  function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("password");
+    var passwordToggle = document.getElementById("password-toggle");
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      passwordToggle.classList.remove("fa-eye");
+      passwordToggle.classList.add("fa-eye-slash");
+    } else {
+      passwordInput.type = "password";
+      passwordToggle.classList.remove("fa-eye-slash");
+      passwordToggle.classList.add("fa-eye");
+    }
+  }
+
+  // Ajouter un gestionnaire d'événement au bouton de bascule
+  var passwordToggle = document.getElementById("password-toggle");
+  passwordToggle.addEventListener("click", togglePasswordVisibility);
+</script>
+<!-- Ajouter les liens vers les fichiers JavaScript de Bootstrap et jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
