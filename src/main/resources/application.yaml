@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/your-db-name
-    username: your-username
-    password:  your-password
+    url: jdbc:mysql://localhost:3306/authspring
+    username: ultimatum
+    password: ultimatum
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,8 +16,8 @@ spring:
   mail:
       host: smtp.gmail.com
       port: 587
-      username: your-username
-      password: your-password
+      username: tondesoulco@gmail.com
+      password: igevozrjqusrhmgm
       properties:
         mail:
           smtp:
@@ -31,7 +31,6 @@ spring:
 
   # Utilisation des cookies pour la gestion des sessions
   session:
-    store-type: jdbc
     jdbc:
       initialize-schema: always
 
