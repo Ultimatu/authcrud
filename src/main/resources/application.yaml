@@ -14,10 +14,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
 
   mail:
-      host: smtp.gmail.com
-      port: 587
-      username: tondesoulco@gmail.com
-      password: igevozrjqusrhmgm
+      host: #your-smtp
+      port: #port
+      username: #your_username
+      password: #your_password
       properties:
         mail:
           smtp:
